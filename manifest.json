@@ -1,0 +1,36 @@
+{
+    "manifest_version": 3,
+    "name": "Links catalog",
+    "version": "0.1.0",
+    "description": "Provide a catalog of links that can be filtered by tags from a CSV source.",
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "images/lc16.png",
+            "32": "images/lc32.png",
+            "48": "images/lc48.png",
+            "128": "images/lc128.png"
+        }
+    },
+    "background": {
+        "service_worker": "service-worker.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["csv.js", "tags.js", "autocomplete.js", "links.js"],
+            "css": ["tags.css", "autocomplete.css", "links.css"]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "matches": ["<all_urls>"],
+            "resources": ["images/icon32.png"]
+        }
+    ],
+    "options_page": "options.html",
+    "permissions": [
+        "tabs",
+        "storage"
+    ]
+}

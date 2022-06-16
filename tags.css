@@ -1,0 +1,45 @@
+#selected-tags {
+    width: 100%;
+    float: left;
+    margin: 10px 0;
+}
+
+#selected-tags a:link {
+    text-decoration: none;
+}
+
+#selected-tags a:visited {
+    text-decoration: none;
+}
+
+#selected-tags a:hover {
+    text-decoration: none;
+}
+
+#selected-tags a:active {
+    text-decoration: none;
+}
+
+#selected-tags ul {
+    list-style-type: none;
+    display: inline;
+    margin: 0;
+    padding: 0px 5px;
+}
+
+#selected-tags li {
+    border: 1px solid #0000002e;
+    border-radius: 6px;
+    padding: 2px 7px;
+    background: #ebde3d73;
+    font-size: 12px;
+    margin: 3px 5px;
+    float: left;
+}
+
+#selected-tags .remove-tag {
+    color: red;
+    padding: 0 0 0 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
