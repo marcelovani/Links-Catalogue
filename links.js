@@ -31,7 +31,17 @@ const displayLinks = async (selectedTags) => {
         link.className = 'link';
         link.onclick = async (ev) => {
             ev.preventDefault();
-            await chrome.tabs.create({ url: ev.target.href, active: false });
+            if (ev.altKey) {
+                // Open link on new tab when Alt key is pressed while clicking.
+                await chrome.tabs.create({url: ev.target.href, active: true});
+            } else {
+                // Open link on same tab.
+                chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+                    var tab = tabs[0];
+                    chrome.tabs.update(tab.id, {url: ev.target.href});
+                    window.close();
+                });
+            }
         };
         tagLi.appendChild(link);
     });
