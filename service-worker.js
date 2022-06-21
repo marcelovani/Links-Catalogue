@@ -1,1 +1,1 @@
-importScripts('page.service.js');
+importScripts('page.service.js', 'tags.service.js');
