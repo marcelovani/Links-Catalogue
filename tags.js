@@ -4,7 +4,7 @@
  * @return {Promise<void>}
  */
 const displayTags = async () => {
-    const selectedTags = await PageService.getTags();
+    const selectedTags = await tagsService.getTags();
     const tagList = document.getElementById('selected-tags');
     tagList.innerHTML = '';
 
@@ -28,7 +28,7 @@ const displayTags = async () => {
         removeLink.dataset.tag_name = item;
         removeLink.onclick = async (ev) => {
             ev.preventDefault();
-            await PageService.saveTag(ev.target.dataset.tag_name, 'remove');
+            await tagsService.saveTag(ev.target.dataset.tag_name, 'remove');
             await displayTags();
         };
         tagLi.appendChild(removeLink);
@@ -47,7 +47,7 @@ const displayTags = async () => {
  * @return {Promise<void>}
  */
 const addTag = async (tag) => {
-    await PageService.saveTag(tag, 'add');
+    await tagsService.saveTag(tag, 'add');
     await displayTags();
 }
 
@@ -60,7 +60,7 @@ const addTag = async (tag) => {
  * @return {Promise<void>}
  */
 const removeTag = async (tag) => {
-    await PageService.saveTag(tag, 'remove');
+    await tagsService.saveTag(tag, 'remove');
     await displayTags();
 }
 

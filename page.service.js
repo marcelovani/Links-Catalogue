@@ -3,7 +3,72 @@ const TAGS_KEY = 'tags';
 let LINKS = [];
 let TAGS = [];
 
-class PageService {
+class StorageService {
+    /**
+     * Save to storage.
+     *
+     * @param key
+     *   The key for the storage
+     * @param value
+     *   The vakye to store
+     *
+     * @return {Promise<unknown>}
+     */
+    static saveStorage = async (key, value) => {
+        const promise = toPromise((resolve, reject) => {
+            chrome.storage.local.set({[key]: value}, () => {
+                if (chrome.runtime.lastError)
+                    reject(chrome.runtime.lastError);
+                resolve(value);
+            });
+        });
+
+        return promise;
+    }
+
+    /**
+     * Clear storage.
+     *
+     * @param key
+     *   The storage key.
+     *
+     * @return {Promise}
+     */
+    static clearStorage = async (key) => {
+        const promise = toPromise((resolve, reject) => {
+            chrome.storage.local.remove([key], () => {
+                if (chrome.runtime.lastError)
+                    reject(chrome.runtime.lastError);
+                resolve();
+            });
+        });
+
+        return promise;
+    }
+
+    /**
+     * Get values from storage
+     *
+     * @param key
+     *   The storage key.
+     *
+     * @return {Promise}
+     */
+    static getStorage = (key) => {
+        const promise = toPromise((resolve, reject) => {
+            chrome.storage.local.get([key], (result) => {
+                if (chrome.runtime.lastError)
+                    reject(chrome.runtime.lastError);
+
+                resolve(result);
+            });
+        });
+
+        return promise;
+    }
+}
+
+class tagsService {
     /**
      *
      * @returns {Promise<Array>}
@@ -12,7 +77,7 @@ class PageService {
         const promise = toPromise((resolve, reject) => {
             getCSV(function(contents) {
                 const list = csvToArray(contents);
-                PageService.extractLinksTags(list);
+                tagsService.extractLinksTags(list);
                 resolve(LINKS);
             })
         });
@@ -56,23 +121,26 @@ class PageService {
     }
 
     /**
+     * Get tags from storage.
      *
      * @returns {Promise<Array>}
      */
-    static getTags = () => {
-        const promise = toPromise((resolve, reject) => {
-            chrome.storage.local.get([TAGS_KEY], (result) => {
-                if (chrome.runtime.lastError)
-                    reject(chrome.runtime.lastError);
-
-                const tags = result.tags ?? [];
-                resolve(tags);
-            });
-        });
-
-        return promise;
+    static getTags = async () => {
+        const result = await StorageService.getStorage(TAGS_KEY);
+        return result.tags ?? [];
     }
 
+    /**
+     * Saves tags.
+     *
+     * @param tag
+     *   Tag to save
+     *
+     * @param action
+     *   Action [remove/add].
+     *
+     * @return {Promise<unknown>}
+     */
     static saveTag = async (tag, action) => {
         const tags = await this.getTags();
         let updateTags = [];
@@ -88,27 +156,16 @@ class PageService {
                 break;
         }
 
-        const promise = toPromise((resolve, reject) => {
-            chrome.storage.local.set({[TAGS_KEY]: updateTags}, () => {
-                if (chrome.runtime.lastError)
-                    reject(chrome.runtime.lastError);
-                resolve(updateTags);
-            });
-        });
-
-        return promise;
+        return StorageService.saveStorage(TAGS_KEY, updateTags);
     }
 
-    static clearTags = () => {
-        const promise = toPromise((resolve, reject) => {
-            chrome.storage.local.remove([TAGS_KEY], () => {
-                if (chrome.runtime.lastError)
-                    reject(chrome.runtime.lastError);
-                resolve();
-            });
-        });
-
-        return promise;
+    /**
+     * Clear tags.
+     *
+     * @return {Promise}
+     */
+    static clearTags = async () => {
+        return StorageService.clearStorage(TAGS_KEY);
     }
 }
 

@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     // Get links from CSV.
-    await PageService.getLinks();
+    await tagsService.getLinks();
 
     // Display tags.
     await displayTags();
