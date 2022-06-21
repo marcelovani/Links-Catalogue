@@ -13,7 +13,10 @@ const displayLinks = async (selectedTags) => {
     // Filter links.
     const selectedLinks = applyFilter(LINKS, selectedTags);
     if (selectedLinks.length < 1) {
-        linksList.innerHTML = 'No results';
+        const message = document.createElement('span');
+        message.className = 'center';
+        message.innerHTML = '<b>No results</b>';
+        linksList.appendChild(message);
         return;
     }
 

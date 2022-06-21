@@ -1,7 +1,8 @@
 #Links Catalogue
 
-##Google sheet
-https://docs.google.com/spreadsheets/d/1lXAUo5RubChwo9NYxEi64ma-CS68S7uT541BAm_TQCU/edit#gid=0
+##How to use Google sheet as source of CSV data
+@todo...
+Example https://docs.google.com/spreadsheets/d/example/export?exportFormat=csv
 
 ##Resources
 - icons_source "https://www.pngrepo.com/"

@@ -1,19 +1,19 @@
-// @todo move this to configuration page.
-const CSV_URL = 'https://docs.google.com/spreadsheets/d/1lXAUo5RubChwo9NYxEi64ma-CS68S7uT541BAm_TQCU/export?exportFormat=csv';
-
 /**
  * Fetches csv from remote
+ *
+ * @param url
+ *    The source url for the CSV
  *
  * @param func
  *    Callback function
  *
- * @return Csv contents
+ * @return Csv contents or error message
  */
-function getCSV(func) {
+const getCSV = async (url, func) => {
     var rawFile = new XMLHttpRequest();
     var allText;
 
-    rawFile.open("GET", CSV_URL, false);
+    rawFile.open("GET", url, false);
     rawFile.onreadystatechange = function () {
         if (rawFile.readyState === 4)
             if (rawFile.status === 200 || rawFile.status == 0)

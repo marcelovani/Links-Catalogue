@@ -55,7 +55,7 @@ class StorageService {
                 if (chrome.runtime.lastError)
                     reject(chrome.runtime.lastError);
 
-                resolve(result);
+                resolve(result[key]);
             });
         });
 

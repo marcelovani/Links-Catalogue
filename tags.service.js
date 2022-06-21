@@ -8,9 +8,9 @@ class tagsService {
      *
      * @returns {Promise<Array>}
      */
-    static getLinks = () => {
+    static getLinks = async (csv_url) => {
         const promise = toPromise((resolve, reject) => {
-            getCSV(function(contents) {
+            getCSV(csv_url, function(contents) {
                 const list = csvToArray(contents);
                 tagsService.extractLinksTags(list);
                 resolve(LINKS);
@@ -62,7 +62,12 @@ class tagsService {
      */
     static getTags = async () => {
         const result = await StorageService.getStorage(TAGS_KEY);
-        return result.tags ?? [];
+        if (Object.values(result).length > 0) {
+            return result;
+        }
+        else {
+            return [];
+        }
     }
 
     /**
