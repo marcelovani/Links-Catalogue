@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="options.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<div id="buttonDiv">
+<div id="container">
+    <h1>Settings</h1>
+    <span id="settings">
+        <input id="csv-url" type="text" name="csv-url" size="100" placeholder="http://www.example.com/example.csv">
+        <input id="save" type="submit" value="Save">
+      </span>
 </div>
-<div>
-    <p>Todo</p>
-    <p>Add config for the url of the Google sheet</p>
-</div>
+<script src='csv.js'></script>
+<script src='options.js'></script>
+<script src='page.service.js'></script>
 </body>
 </html>
