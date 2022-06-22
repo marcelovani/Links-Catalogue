@@ -1,17 +1,15 @@
 /**
- * Displays linkes filtered by selected tags.
+ * Displays links.
  *
- * @param array selectedTags
- *    The selected tags.
+ * @param array selectedLinks
+ *    The selected links.
  *
  * @return {Promise<void>}
  */
-const displayLinks = async (selectedTags) => {
+const displayLinks = async (selectedLinks) => {
     const linksList = document.getElementById('links');
     linksList.innerHTML = '';
 
-    // Filter links.
-    const selectedLinks = applyFilter(LINKS, selectedTags);
     if (selectedLinks.length < 1) {
         const message = document.createElement('span');
         message.className = 'center';
@@ -20,12 +18,12 @@ const displayLinks = async (selectedTags) => {
         return;
     }
 
-    const tagUl = document.createElement('ul');
-    linksList.appendChild(tagUl);
+    const linkUl = document.createElement('ul');
+    linksList.appendChild(linkUl);
 
     selectedLinks.forEach(item => {
-        const tagLi = document.createElement('li');
-        tagUl.appendChild(tagLi);
+        const linkLi = document.createElement('li');
+        linkUl.appendChild(linkLi);
 
         const link = document.createElement('a');
         link.title = item.url;
@@ -46,6 +44,6 @@ const displayLinks = async (selectedTags) => {
                 });
             }
         };
-        tagLi.appendChild(link);
+        linkLi.appendChild(link);
     });
 }

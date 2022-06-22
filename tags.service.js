@@ -21,7 +21,7 @@ class tagsService {
     }
 
     /**
-     * Extracts links and from CSV and stores on global variables to be used by autocomplete search.
+     * Extracts links and tags from CSV and stores on global variables to be used by autocomplete search.
      *
      * @param list
      *    The array of links

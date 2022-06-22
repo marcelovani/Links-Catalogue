@@ -1,33 +1,37 @@
-#selected-tags {
+#selected-tags, #available-tags {
     width: 100%;
     float: left;
-    margin: 10px 0;
+    margin: 3px 0;
 }
 
-#selected-tags a:link {
+#selected-tags h4, #available-tags h4 {
+    margin: 1px 6px;
+}
+
+.tag a:link {
     text-decoration: none;
 }
 
-#selected-tags a:visited {
+.tag a:visited {
     text-decoration: none;
 }
 
-#selected-tags a:hover {
+.tag a:hover {
     text-decoration: none;
 }
 
-#selected-tags a:active {
+.tag a:active {
     text-decoration: none;
 }
 
-#selected-tags ul {
+ul.tag {
     list-style-type: none;
     display: inline;
     margin: 0;
     padding: 0px 5px;
 }
 
-#selected-tags li {
+.tag li {
     border: 1px solid #0000002e;
     border-radius: 6px;
     padding: 2px 7px;
@@ -37,9 +41,16 @@
     float: left;
 }
 
-#selected-tags .remove-tag {
+.tag .remove-tag {
     color: red;
     padding: 0 0 0 6px;
     font-weight: bold;
     cursor: pointer;
+}
+
+#available-tags .tag {
+    cursor: pointer;
+}
+#available-tags .tag li:hover {
+    border: 1px solid green;
 }
